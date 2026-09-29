@@ -1,0 +1,247 @@
+:host {
+  display: none;
+  margin: 10px 0 6px;
+  font-family: "YouTube Sans", "Roboto", Arial, sans-serif;
+  color-scheme: dark;
+}
+
+:host([open]) {
+  display: block;
+}
+
+:host(.launcher-host) {
+  display: inline-flex;
+  margin: 2px 0 0 2px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.launcher {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: #0f0f0f;
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.launcher svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.launcher:hover {
+  background: #272727;
+}
+
+.launcher.on {
+  background: #fff;
+  color: #0f0f0f;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 4px 4px 4px 12px;
+  background: #0f0f0f;
+  color: #fff;
+  border: 1px solid #3f3f3f;
+  border-radius: 12px;
+}
+
+.mark-group {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 4px 0 2px;
+  background: #272727;
+  border-radius: 9px;
+  gap: 2px;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 8px 0 10px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  border-radius: 7px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.mark:hover {
+  background: #3d3d3d;
+}
+
+.mark .label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #9a9a9a;
+}
+
+.mark.set .label {
+  color: #c4b5fd;
+}
+
+.mark .time {
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #fff;
+  min-width: 3.7em;
+}
+
+.nudge {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: #3f3f3f;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.nudge svg {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+.nudge:hover {
+  background: #525252;
+}
+
+.dur {
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  padding: 0 4px;
+  min-width: 3.2em;
+}
+
+button.ghost,
+button.primary {
+  height: 36px;
+  border-radius: 9px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.ghost {
+  border: 0;
+  background: #272727;
+  color: #fff;
+}
+
+button.ghost.icon {
+  width: 36px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+button.ghost.icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+button.ghost:hover {
+  background: #3d3d3d;
+}
+
+button.ghost.on {
+  background: #fff;
+  color: #0f0f0f;
+}
+
+button.primary {
+  border: 0;
+  background: #fff;
+  color: #0f0f0f;
+}
+
+button.primary:hover {
+  background: #e5e5e5;
+}
+
+button.primary:disabled {
+  background: #3d3d3d;
+  color: #8c8c8c;
+  cursor: default;
+}
+
+button.primary.warn {
+  background: #fff3e0;
+  color: #9a3412;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 500;
+  color: #606060;
+  min-height: 16px;
+  padding-left: 2px;
+}
+
+.status.busy {
+  color: #0f0f0f;
+}
+
+.status.ok {
+  color: #0d7a32;
+}
+
+.status.err {
+  color: #c00;
+}
+
+.status.setup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.linkish {
+  border: 0;
+  background: none;
+  color: #065fd4;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}

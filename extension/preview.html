@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Capture bar preview</title>
+  <style>
+    body { margin: 0; font-family: "YouTube Sans", "Roboto", Arial, sans-serif; }
+    .page { background: #fff; color: #0f0f0f; padding: 32px 40px; }
+    .page.dark { background: #0f0f0f; color: #f1f1f1; }
+    h1 { font-size: 20px; margin: 0 0 12px; font-weight: 700; }
+    .label { font-size: 12px; color: #606060; margin-bottom: 20px; }
+    .page.dark .label { color: #aaa; }
+  </style>
+</head>
+<body>
+  <section class="page" id="light">
+    <div class="label">Light YouTube</div>
+    <h1>Your Monthly Dose of Good News | September</h1>
+    <div class="mount"></div>
+  </section>
+  <section class="page dark" id="dark">
+    <div class="label">Dark YouTube</div>
+    <h1>Your Monthly Dose of Good News | September</h1>
+    <div class="mount"></div>
+  </section>
+  <script>
+    const css = `:host {
+  display: block;
+  margin: 10px 0 6px;
+  font-family: "YouTube Sans", "Roboto", Arial, sans-serif;
+  color-scheme: dark;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 4px 4px 4px 12px;
+  background: #0f0f0f;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.brand svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.mark-group {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 4px 0 2px;
+  background: #272727;
+  border-radius: 9px;
+  gap: 2px;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  height: 32px;
+  padding: 0 8px 0 10px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  border-radius: 7px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.mark:hover {
+  background: #3d3d3d;
+}
+
+.mark .label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #bdbdbd;
+}
+
+.mark.set .label {
+  color: #c4b5fd;
+}
+
+.mark .time {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: #fff;
+  min-width: 3.6em;
+}
+
+.nudge {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: #3f3f3f;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.nudge svg {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+.nudge:hover {
+  background: #525252;
+}
+
+.dur {
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  padding: 0 4px;
+  min-width: 3.2em;
+}
+
+button.ghost,
+button.primary {
+  height: 36px;
+  border-radius: 9px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.ghost {
+  border: 0;
+  background: #272727;
+  color: #fff;
+}
+
+button.ghost:hover {
+  background: #3d3d3d;
+}
+
+button.ghost.on {
+  background: #fff;
+  color: #0f0f0f;
+}
+
+button.primary {
+  border: 0;
+  background: #fff;
+  color: #0f0f0f;
+  margin-left: auto;
+}
+
+button.primary:hover {
+  background: #e5e5e5;
+}
+
+button.primary:disabled {
+  background: #3d3d3d;
+  color: #8c8c8c;
+  cursor: default;
+}
+
+button.primary.warn {
+  background: #fff3e0;
+  color: #9a3412;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 500;
+  color: #606060;
+  min-height: 16px;
+  padding-left: 2px;
+}
+
+.status.busy {
+  color: #0f0f0f;
+}
+
+.status.ok {
+  color: #0d7a32;
+}
+
+.status.err {
+  color: #c00;
+}
+
+.status.setup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.linkish {
+  border: 0;
+  background: none;
+  color: #065fd4;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+`;
+    const chevron = (dir) => {
+      const d = dir === "left" ? "M8.2 2.5 3.8 7l4.4 4.5" : "M5.8 2.5 10.2 7l-4.4 4.5";
+      return `<svg viewBox="0 0 14 14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="${d}"/></svg>`;
+    };
+    const html = `
+      <div class="wrap">
+        <div class="bar">
+          <span class="brand">
+            <svg viewBox="0 0 14 14" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="1.6" d="M2 5V3.2A1.2 1.2 0 0 1 3.2 2H5M9 2h1.8A1.2 1.2 0 0 1 12 3.2V5M12 9v1.8A1.2 1.2 0 0 1 10.8 12H9M5 12H3.2A1.2 1.2 0 0 1 2 10.8V9"/>
+            </svg>
+            Capture
+          </span>
+          <div class="mark-group">
+            <button class="mark set" type="button">
+              <span class="label">Start</span>
+              <span class="time">1:50.1</span>
+            </button>
+            <button class="nudge" type="button">${chevron("left")}</button>
+            <button class="nudge" type="button">${chevron("right")}</button>
+          </div>
+          <div class="mark-group">
+            <button class="mark set" type="button">
+              <span class="label">End</span>
+              <span class="time">1:54.6</span>
+            </button>
+            <button class="nudge" type="button">${chevron("left")}</button>
+            <button class="nudge" type="button">${chevron("right")}</button>
+          </div>
+          <span class="dur">4.5s</span>
+          <button class="ghost" type="button">Loop</button>
+          <button class="primary" type="button">Make template</button>
+        </div>
+      </div>`;
+    document.querySelectorAll(".mount").forEach((mount) => {
+      const shadow = mount.attachShadow({ mode: "open" });
+      const style = document.createElement("style");
+      style.textContent = css;
+      const wrap = document.createElement("div");
+      wrap.innerHTML = html;
+      shadow.append(style, wrap.firstElementChild);
+    });
+  </script>
+</body>
+</html>

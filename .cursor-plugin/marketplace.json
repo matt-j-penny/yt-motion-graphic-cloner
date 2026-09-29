@@ -1,0 +1,17 @@
+{
+  "name": "yt-motion-capture",
+  "owner": {
+    "name": "Matt Penny"
+  },
+  "metadata": {
+    "description": "Capture a YouTube motion graphic and rebuild it as a HyperFrames template.",
+    "version": "0.4.0"
+  },
+  "plugins": [
+    {
+      "name": "yt-motion-capture",
+      "source": "./",
+      "description": "Mark a YouTube clip and rebuild it as an editable HyperFrames template using Claude Code."
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "YT Motion Capture",
+  "version": "0.1.0",
+  "description": "Mark a start and end on a YouTube video and save that motion graphic as a template.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "YT Motion Capture",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": ["storage", "notifications"],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://youtube.com/*",
+    "http://127.0.0.1:47821/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://youtube.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["content.css", "icons/*"],
+      "matches": ["https://www.youtube.com/*", "https://youtube.com/*"]
+    }
+  ],
+  "commands": {
+    "mark-start": {
+      "suggested_key": { "default": "Alt+Shift+S" },
+      "description": "Mark start time"
+    },
+    "mark-end": {
+      "suggested_key": { "default": "Alt+Shift+E" },
+      "description": "Mark end time"
+    },
+    "toggle-loop": {
+      "description": "Loop the marked range"
+    },
+    "make-template": {
+      "suggested_key": { "default": "Alt+Shift+M" },
+      "description": "Save the marked clip"
+    }
+  }
+}
