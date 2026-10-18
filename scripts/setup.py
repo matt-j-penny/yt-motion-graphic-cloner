@@ -93,6 +93,8 @@ def ensure_library() -> dict:
         CATALOG_JSON.write_text("[]\n", encoding="utf-8")
     if not CATALOG_JS.exists():
         CATALOG_JS.write_text("window.CAPTURED_TEMPLATES = [];\n", encoding="utf-8")
+    if not LIBRARY_PAGE.exists():
+        shutil.copy(ROOT / "scripts" / "template-library.html", LIBRARY_PAGE)
     wired = False
     if LIBRARY_PAGE.exists():
         html = LIBRARY_PAGE.read_text(encoding="utf-8")

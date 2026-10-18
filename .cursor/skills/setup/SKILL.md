@@ -25,7 +25,7 @@ The script:
 - installs `ffmpeg` and `yt-dlp` with Homebrew if needed
 - installs Claude Code if it is missing
 - creates `~/Documents/CC/Hyperframes` library folders
-- hooks captured templates into `template-library.html` when that file exists
+- creates `template-library.html` if missing, or hooks captured templates into the existing one
 - starts the Mac helper (stays on after restart)
 - opens the `extension` folder and Chrome’s extensions page
 
